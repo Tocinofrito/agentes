@@ -26,16 +26,20 @@ function resolverEcuacion(ecuacion) {
   var LadoDer = partes[1].trim();
 
   // Encontrar términos en ambos lados
+  //Lo que hace es delimitar dependiendo del signo desde un signo a antes del otro para tomarlo como un término
   var TerIzq = LadoIzq.match(/[+-]?[^+-]+/g);
   var TerDer = LadoDer.match(/[+-]?[^+-]+/g);
 
   // Inicializar sumatorias
+  //Esto se suma conforme los terminos dependientes o independientes
   var sumXIzq = 0;
   var sumIzq = 0;
   var sumXDer = 0;
   var sumDer = 0;
 
   // Calcular sumatorias para el lado izquierdo
+  //lo que hacemos es verificar si tiene x el término, en caso de se suma a sumXIzq o en caso de ser el independiente pos el que no lleva
+  //Eliminamos el char "x" y hacemos la suma
   for (var i = 0; i < TerIzq.length; i++) {
     var termino = TerIzq[i].trim();
     if (termino.includes('x')) {
@@ -46,6 +50,7 @@ function resolverEcuacion(ecuacion) {
   }
 
   // Calcular sumatorias para el lado derecho
+  //Lo mismo que el anterior
   for (var j = 0; j < TerDer.length; j++) {
     var termino = TerDer[j].trim();
     if (termino.includes('x')) {
@@ -56,6 +61,10 @@ function resolverEcuacion(ecuacion) {
   }
 
   // Calcular la solución
+  //La solución se hace con un despeje normal de x suponiento no existe el termino independiente
+  //Entonces primero cambiamos el signo de uno de los 2 lados para dejarlo en un lado y sumamos algebraicamente
+  //Después verificamos si el término que acompaña a x es 0, de ser así no existe solución, después hacemos la suma de los independientes
+  //Ya con su despeje, y retornamos el valor como texto
   sumXIzq = sumXIzq + sumXDer * -1;
   if (sumXIzq !== 0) {
     sumDer = -1 * sumIzq + sumDer;
@@ -65,6 +74,9 @@ function resolverEcuacion(ecuacion) {
     return "Sin solución";
   }
 }
+//Esta funcion toma la tabla definida en el index.html, al tomarla podemos modificar el contenido
+//En este caso añadimos cada solucion que calculamos, mostramos la entrada que es la ecuacion a resolver
+//Y su solución respecto a x
 
 function mostrarResultados(entrada, salida) {
   var table = document.getElementById("resultadosTable");
