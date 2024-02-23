@@ -1,0 +1,24 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+}
+
+table {
+  width: 60%;
+  margin-top: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.btn-primary {
+  margin-top: 10px;
+}

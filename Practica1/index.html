@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <title>Resultados de la Ecuación</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">Resultados de la Ecuación</h2>
+    <!--Aquí definimos para introducir el form-->
+    <form id="ecuacionForm">
+      <div class="form-group">
+        <label for="ecuacionInput">Ingrese la ecuación:</label>
+        <input type="text" class="form-control" id="ecuacionInput" placeholder="Por ejemplo: 2x + 5 = 10">
+      </div>
+      <!--Llamamos a la funcion para calcular x-->
+      <button type="button" class="btn btn-primary" onclick="calcularEcuacion()">Calcular</button>
+    </form>
+
+    <table class="table mt-4" id="resultadosTable">
+      <!--Aquí js introduce los datos-->
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
