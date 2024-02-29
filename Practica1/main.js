@@ -1,14 +1,14 @@
+//Mandujano Diaz Nelson Ismael
+//Hernandez Santana Diana
 function calcularEcuacion() {
   // Obtener la entrada del usuario
-  //Se obtiene el valor de la caja input definida en el html
+  // Se obtiene el valor de la caja input definida en el HTML
   var ecuacionInput = document.getElementById("ecuacionInput");
   var ecuacion = ecuacionInput.value;
 
   // Validar si la entrada no está vacía
   if (ecuacion.trim() !== "") {
-    // Realizar la solicitud al servidor para obtener los resultados (puedes hacerlo usando AJAX o Fetch)
-
-    // Supongamos que el resultado es el siguiente
+    // Llama a la función resolverEcuacion con la ecuación como argumento
     var resultado = resolverEcuacion(ecuacion);
 
     // Mostrar la entrada y salida en la tabla
@@ -18,14 +18,19 @@ function calcularEcuacion() {
   }
 }
 
+
 function resolverEcuacion(ecuacion) {
   // Dividir la ecuación en partes
   //Se dividirá a partir de el "="
+
   var partes = ecuacion.split("=");
   var LadoIzq = partes[0].trim();
   var LadoDer = partes[1].trim();
 
   // Encontrar términos en ambos lados
+  //La regex expresa que se toma desde que existe o no el signo hasta el siguiente
+  //Así toma el valor con su signo y su literal("x") o en su defecto que no lo tenga
+  
   var TerIzq = LadoIzq.match(/[+-]?[^+-]+/g);
   var TerDer = LadoDer.match(/[+-]?[^+-]+/g);
 
@@ -36,24 +41,29 @@ function resolverEcuacion(ecuacion) {
   var sumDer = 0;
 
   // Calcular sumatorias para el lado izquierdo
-  for (var i = 0; i < TerIzq.length; i++) {
-    var termino = TerIzq[i].trim();
-    if (termino.includes('x')) {
-      sumXIzq += eval(termino.replace('x', ''));
-    } else {
-      sumIzq += eval(termino);
-    }
+for (var i = 0; i < TerIzq.length; i++) {
+  var termino = TerIzq[i].trim();
+  if (termino.includes('x')) {
+    //Lo siguiente nos ayuda a reemplaz
+    var coeficiente = termino.replace(/[^\d-]/g, '') || (termino.startsWith('-') ? -1 : 1);
+    sumXIzq += eval(coeficiente);
+  } else {
+    sumIzq += eval(termino);
   }
+}
 
-  // Calcular sumatorias para el lado derecho
-  for (var j = 0; j < TerDer.length; j++) {
-    var termino = TerDer[j].trim();
-    if (termino.includes('x')) {
-      sumXDer += eval(termino.replace('x', ''));
-    } else {
-      sumDer += eval(termino);
-    }
+// Calcular sumatorias para el lado derecho
+for (var j = 0; j < TerDer.length; j++) {
+  var termino = TerDer[j].trim();
+  if (termino.includes('x')) {
+    // Modificado para manejar términos que consisten solo en la variable x
+    var coeficiente = termino.replace(/[^\d-]/g, '') || (termino.startsWith('-') ? -1 : 1);
+    sumXDer += eval(coeficiente);
+  } else {
+    sumDer += eval(termino);
   }
+}
+
 
   // Calcular la solución
   sumXIzq = sumXIzq + sumXDer * -1;
