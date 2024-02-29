@@ -66,6 +66,10 @@ for (var j = 0; j < TerDer.length; j++) {
 
 
   // Calcular la solución
+  //La solución se hace con un despeje normal de x suponiento no existe el termino independiente
+  //Entonces primero cambiamos el signo de uno de los 2 lados para dejarlo en un lado y sumamos algebraicamente
+  //Después verificamos si el término que acompaña a x es 0, de ser así no existe solución, después hacemos la suma de los independientes
+  //Ya con su despeje, y retornamos el valor como texto
   sumXIzq = sumXIzq + sumXDer * -1;
   if (sumXIzq !== 0) {
     sumDer = -1 * sumIzq + sumDer;
