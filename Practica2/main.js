@@ -51,7 +51,7 @@ function busqueda_anchura(raiz, objetivo) {
         const visitado = new Set();
         cola.push(raiz);
         visitado.add(raiz.valor.toString());
-
+        
         while (cola.length > 0) {
             // Imprimir el estado de la cola antes de procesarla en esta iteración
             imprimir_cola(cola, "estados");
@@ -66,11 +66,11 @@ function busqueda_anchura(raiz, objetivo) {
             generar_hijos(nodo, cola, visitado);
         }
 
-        console.log("No se encontró una solución para la búsqueda en anchura.");
-        console.log("Nodos visitados BFS:");
-        for (const estado of visitado) {
-            imprimir(estado, "nodos-visitados-bfs");
-        }
+        //console.log("No se encontró una solución para la búsqueda en anchura.");
+        //console.log("Nodos visitados BFS:");
+        // for (const estado of visitado) {
+        //     imprimir(estado, "nodos-visitados-bfs");
+        // }
         return visitado;
     }
 
@@ -97,11 +97,11 @@ function busqueda_profundidad(raiz, objetivo) {
             generar_hijos(nodo, pila, visitado);
         }
 
-        console.log("No se encontró una solución para la búsqueda en profundidad.");
-        console.log("Nodos visitados DFS:");
-        for (const estado of visitado) {
-            imprimir(estado, "nodos-visitados-dfs");
-        }
+        //console.log("No se encontró una solución para la búsqueda en profundidad.");
+        //console.log("Nodos visitados DFS:");
+        // for (const estado of visitado) {
+        //     imprimir(estado, "nodos-visitados-dfs");
+        // }
         return visitado;
     }
 
@@ -114,10 +114,10 @@ function generar_hijos(nodo, estructura, visitado) {
     const estado = nodo.valor;
     const posicion_cero = estado.indexOf(0);
     const movimientos = {
-        0: [1, 2],
-        1: [0, 3],
-        2: [0, 3],
-        3: [1, 2]
+        0: [2, 1],
+        1: [3, 0],
+        2: [3, 0],
+        3: [2, 1]
     };
     for (const movimiento of movimientos[posicion_cero]) {
         const nuevo_estado = estado.slice();
@@ -191,5 +191,7 @@ document.getElementById("solve").addEventListener("click", () => {
     // Se genera el nodo raiz
     const raiz = new Nodo(estadoInicial);
     const visitadosBFS = busqueda_anchura(raiz, estadoFinal);
+    console.log(visitadosBFS)
     const visitadosDFS = busqueda_profundidad(raiz, estadoFinal);
+    console.log(visitadosDFS)
 });
