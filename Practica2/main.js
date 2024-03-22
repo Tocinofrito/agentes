@@ -33,18 +33,23 @@ function imprimir_pila(pila, id) {
     const caption = document.createElement("caption");
     caption.textContent = "Estado de la pila:";
     table.appendChild(caption);
-    for (const nodo of pila) {
+    
+    // Recorrer la pila en sentido inverso
+    for (let i = pila.length - 1; i >= 0; i--) {
+        const nodo = pila[i];
         const row = document.createElement("tr");
-        for (let i = 0; i < nodo.valor.length; i++) {
+        for (let j = 0; j < nodo.valor.length; j++) {
             const cell = document.createElement("th");
-            cell.textContent = nodo.valor[i];
+            cell.textContent = nodo.valor[j];
             row.appendChild(cell);
         }
         table.appendChild(row);
     }
+    
     div.appendChild(table);
     document.getElementById(id).appendChild(div);
 }
+
 
 function busqueda_anchura(raiz, objetivo) {
     function busqueda_comun(cola) {
@@ -66,11 +71,7 @@ function busqueda_anchura(raiz, objetivo) {
             generar_hijos(nodo, cola, visitado);
         }
 
-        //console.log("No se encontró una solución para la búsqueda en anchura.");
-        //console.log("Nodos visitados BFS:");
-        // for (const estado of visitado) {
-        //     imprimir(estado, "nodos-visitados-bfs");
-        // }
+      
         return visitado;
     }
 
@@ -97,11 +98,7 @@ function busqueda_profundidad(raiz, objetivo) {
             generar_hijos(nodo, pila, visitado);
         }
 
-        //console.log("No se encontró una solución para la búsqueda en profundidad.");
-        //console.log("Nodos visitados DFS:");
-        // for (const estado of visitado) {
-        //     imprimir(estado, "nodos-visitados-dfs");
-        // }
+        
         return visitado;
     }
 
@@ -144,41 +141,7 @@ function imprimir_sol(nodo, id) {
     for (let i = solucion.length - 1; i >= 0; i--) {
         imprimir(solucion[i], id);
     }
-    // const estado_final = solucion[solucion.length - 1];
-    // const table = document.createElement("table");
-    // const caption = document.createElement("caption");
-    // caption.textContent = "Estado final:";
-    // table.appendChild(caption);
-    // for (let i = 0; i < estado_final.length; i += 2) {
-    //     const row = document.createElement("tr");
-    //     for (let j = 0; j < 2; j++) {
-    //         const cell = document.createElement("th");
-    //         cell.textContent = estado_final[i + j];
-    //         row.appendChild(cell);
-    //     }
-    //     table.appendChild(row);
-    // }
-    // document.getElementById(id).appendChild(table);
 }
-
-// function imprimir(estado, id) {
-//     const table = document.createElement("table");
-
-//     const caption = document.createElement("caption");
-//     caption.textContent = "Estado:";
-//     table.appendChild(caption);
-//     for (let i = 0; i < estado.length; i += 2) {
-//         const row = document.createElement("tr");
-//         for (let j = 0; j < 2; j++) {
-//             const cell = document.createElement("th");
-//             cell.textContent = estado[i + j];
-//             row.appendChild(cell);
-//         }
-//         table.appendChild(row);
-//     }
-//     document.getElementById(id).appendChild(table);
-// }
-
 // Obtener datos de las tablas
 document.getElementById("solve").addEventListener("click", () => {
     const estadoInicial = [];
