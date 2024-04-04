@@ -9,12 +9,71 @@ var tablaX = document.getElementById("Tablax");
 var tablaY = document.getElementById("Tablay");
 //Eventos
 createVec.addEventListener("click", genTablesXY ,false);
-lernMatrix.addEventListener("click", function() {
-    let valoresLeidos = LeerTabla();
-    console.log(valoresLeidos);
-});
+lernMatrix.addEventListener("click", LernMatrix,false);
 //Funcion LernMatrix
+function LernMatrix(){
+    let valoresTablaX = LeerTabla();
+    var yMat = TablaY();
+    memMatrix(yMat,valoresTablaX)
+    //[[],[],[],[]]
+    //[[],[],[],[]]
+    //[[],[],[],[]]
 
+    //Y
+    //   
+    // [[1],[0],[0]]
+    // [[0],[1],[0]]
+    // [[0],[0],[1]]
+}
+//Funcion para generar matriz memoria con tablaX y tablaY
+function memMatrix(yMat, valoresTablaX){
+    let y1 = yMat.pop()
+}
+//------------------------------------
+    //[1,-1,+1,-1,+1]
+    //[0,0,0,0,0]
+    //[0,0,0,0,0]
+
+function Prueba(){
+    let Comparacion = []
+    let Resultado = []
+    let vectorx = [[1,0,1,0,1],[1,1,0,0,1],[1,0,1,1,0]]
+    let vectory = [[1,0,0],[0,1,0],[0,0,1]]
+    P = 3
+    n = 5 
+    for(let i = 0; i < P; i++) {
+        let reversex = vectorx.reverse();
+        let popx = reversex.pop();
+        let reversey = vectory.reverse();
+        let popy = reversey.pop();
+        for(let j = 0; j < n; j++) {
+              if(popx[j]== 1 && popy[i] == 1)
+              {
+                Comparacion[j]= 1;
+                //memor[0] +=1
+              }
+              else if(popx[j]== 0 && popy[i] == 1)
+              {
+                Comparacion[j]= -1;
+                //memor[0] -=1
+              }
+              else{
+              //No es necesario hacer nada
+
+            }
+        Resultado.push(Comparacion);
+    }
+    console.log(Comparacion)
+}
+
+}
+    
+
+
+
+
+
+//------------------------------------
 // Función para leer los valores de los input con la clase Xk
 function LeerTabla() {
     let valores = [];
@@ -38,9 +97,11 @@ function genTablesXY(){
     console.log("funcion gentables");
     P = parseInt(document.getElementById("clases").value);
     n = parseInt(document.getElementById("dimensionx").value);
-    console.log(tablaY);
-    TablaY();
-    TablaX();
+    
+    var MP = TablaY();
+    ImprimirTabla(MP,"y",P, "Y");
+    var PatX = TablaX();
+    ImprimirTabla(PatX, "x", n,"X")
 
 }
 
@@ -52,35 +113,35 @@ function TablaX(){
         console.log(arr)
         PatX.push(arr);
     }
-    ImprimirTabla(PatX, "x", n,"X")
+    return PatX;
 }
-function Leer() {
-    let estructura = document.getElementById("Datosx")
+// function Leer() {
+//     let estructura = document.getElementById("Datosx")
     
-    for(let i = 0; i < P; i++) {
-        estructura.appendChild(document.createTextNode("x"+(i+ 1)));
-        for(let j = 0; j < n; j++) {
-            let x = document.createElement("input");
-            estructura.appendChild(x);
-            x.type="number"
-            x.id="dato" + i  + j; 
-        }
-        estructura.appendChild(document.createElement("br"));
-    }
-}
+//     for(let i = 0; i < P; i++) {
+//         estructura.appendChild(document.createTextNode("x"+(i+ 1)));
+//         for(let j = 0; j < n; j++) {
+//             let x = document.createElement("input");
+//             estructura.appendChild(x);
+//             x.type="number"
+//             x.id="dato" + i  + j; 
+//         }
+//         estructura.appendChild(document.createElement("br"));
+//     }
+// }
 
-function Vectorx(){
+// function Vectorx(){
     
-    for(let i = 0; i < P; i++) {
-        xdatos = Array(n)
-        for(let j = 0; j < n; j++) {
-            xdatos[j] = parseInt(document.getElementById("dato" + i + j).value) ; 
-        }
-        vectorx.push(xdatos);
-    }
+//     for(let i = 0; i < P; i++) {
+//         xdatos = Array(n)
+//         for(let j = 0; j < n; j++) {
+//             xdatos[j] = parseInt(document.getElementById("dato" + i + j).value) ; 
+//         }
+//         vectorx.push(xdatos);
+//     }
 
-    ImprimirTabla(vectorx,1,n)
-}
+//     ImprimirTabla(vectorx,1,n)
+// }
 
 function TablaY() {
     let MP = []
@@ -89,7 +150,11 @@ function TablaY() {
         arrClass[k] = 1;
         MP.push(arrClass);
     }
-    ImprimirTabla(MP,"y",P, "Y");
+    console.log("Hola"+MP);
+    //[1,0,0,
+    //0,1,0,
+    //0,0,1]
+    return MP
     
 }
 function ImprimirTabla(vector, x, columna, optional) {
@@ -110,3 +175,5 @@ function ImprimirTabla(vector, x, columna, optional) {
     tabla += "</table>";
     TablaC.innerHTML = tabla;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
