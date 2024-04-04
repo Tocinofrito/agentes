@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Table template</title>
   <link href="styles.css" rel="stylesheet" type="text/css">
-  <title>Document</title>
 </head>
 <body>
-  <table id="yClasses">
-    <caption>Clases Y</caption>
-    <tr>
-      <th>Y1</th>
-      <th>Y2</th>
-      <th>Y3</th>
-    </tr>
-    <tr>
-      <th>1</th>
-      <th>0</th>
-      <th>0</th>
-    </tr>
-    <tr>
-      <th>0</th>
-      <th>1</th>
-      <th>0</th>
-    </tr>
-    <tr>
-      <th>0</th>
-      <th>0</th>
-      <th>1</th>
-    </tr>
-  </table>
+  <div id="Botones">
+    <p>No. de patrones</p>
+    <input type="number" id="clases">
+    <p>Dimensión de X:</p>
+    <input type="number" id="dimensionx">
+    <br>
+    <button id="create_Vector">Crea vectores</button>
+    <button id="LernMatrix">LernMatrix</button>
+  </div>
+  <div id="clase">
+    <p>Clase</p>
+    <input type="number">
+    <button type="button">Clasifica</button>
+  </div>
+<!-- ------------------------------------------------------------------------------------------------------------------ -->
+<br>
+<div id="Datosx">
+    <!--Estructura para la lectura de datos, POR EL MOMENTO NO SE USA-->
+</div>
+<br>
+<div id="Tablax">
+<!--Contenedor de la tabla y-->
+</div>
+<br>
+<div id="Tablay">
+<!--Contenedor de la tabla x-->
+</div>
+<br>
+
+
+<script type="text/javascript" src="main.js"></script>
 </body>
 </html>
