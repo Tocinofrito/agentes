@@ -15,24 +15,13 @@ function LernMatrix(){
     let valoresTablaX = LeerTabla();
     var yMat = TablaY();
     memMatrix(yMat,valoresTablaX)
-    //[[],[],[],[]]
-    //[[],[],[],[]]
-    //[[],[],[],[]]
 
-    //Y
-    //   
-    // [[1],[0],[0]]
-    // [[0],[1],[0]]
-    // [[0],[0],[1]]
 }
 //Funcion para generar matriz memoria con tablaX y tablaY
 function memMatrix(yMat, valoresTablaX){
     let y1 = yMat.pop()
 }
 //------------------------------------
-    //[1,-1,+1,-1,+1]
-    //[0,0,0,0,0]
-    //[0,0,0,0,0]
 
 
     function Prueba(){
@@ -63,6 +52,7 @@ function memMatrix(yMat, valoresTablaX){
             Resultado.push(Comparacion);
         }
         console.log(Resultado)
+        return Resultado;
       }
 
 
@@ -111,33 +101,7 @@ function TablaX(){
     }
     return PatX;
 }
-// function Leer() {
-//     let estructura = document.getElementById("Datosx")
-    
-//     for(let i = 0; i < P; i++) {
-//         estructura.appendChild(document.createTextNode("x"+(i+ 1)));
-//         for(let j = 0; j < n; j++) {
-//             let x = document.createElement("input");
-//             estructura.appendChild(x);
-//             x.type="number"
-//             x.id="dato" + i  + j; 
-//         }
-//         estructura.appendChild(document.createElement("br"));
-//     }
-// }
 
-// function Vectorx(){
-    
-//     for(let i = 0; i < P; i++) {
-//         xdatos = Array(n)
-//         for(let j = 0; j < n; j++) {
-//             xdatos[j] = parseInt(document.getElementById("dato" + i + j).value) ; 
-//         }
-//         vectorx.push(xdatos);
-//     }
-
-//     ImprimirTabla(vectorx,1,n)
-// }
 
 function TablaY() {
     let MP = []
