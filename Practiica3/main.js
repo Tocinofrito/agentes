@@ -1,65 +1,29 @@
-
+//Variables 
+var P = 0
+var n = 0 
+//var clase = 0
+// Matrix
 var vectorx = []
 var xdatos = []
+var lernM = []
+var xn = []
+
 //Selectores botones
-var createVec = document.getElementById("create_Vector")
+var createVec = document.getElementById("genTablesXY")
 var lernMatrix = document.getElementById("LernMatrix")
+var clasifica = document.getElementById("Patron");
+var clasePatron = document.getElementById("clasePatron");
 //Selectores tablas
 var tablaX = document.getElementById("Tablax");
 var tablaY = document.getElementById("Tablay");
+var tablaM = document.getElementById("TablaM");
+
+
 //Eventos
-createVec.addEventListener("click", genTablesXY ,false);
-lernMatrix.addEventListener("click", LernMatrix,false);
-//Funcion LernMatrix
-function LernMatrix(){
-    let valoresTablaX = LeerTabla();
-    var yMat = TablaY();
-    memMatrix(yMat,valoresTablaX)
+createVec.addEventListener("click", genTablesXY, false);
+lernMatrix.addEventListener("click", LernMatrix, false);
+clasifica.addEventListener("click", addPattern, false);
 
-}
-//Funcion para generar matriz memoria con tablaX y tablaY
-function memMatrix(yMat, valoresTablaX){
-    let y1 = yMat.pop()
-}
-//------------------------------------
-
-
-    function Prueba(){
-        let Resultado = []
-        let vectorx = [[1,0,1,0,1],[1,1,0,0,1],[1,0,1,1,0]]
-        let vectory = [[1,0,0],[0,1,0],[0,0,1]]
-        P = 3
-        n = 5 
-        let reversey = vectory.reverse();
-        let reversex = vectorx.reverse();
-        for(let i = 0; i < P; i++) {
-            let popx = reversex.pop();
-            let popy = reversey.pop();
-            let Comparacion = []
-            for(let j = 0; j < n; j++) {
-             
-                  if(popx[j]== 1 && popy[i] == 1)
-                {
-                  Comparacion[j]= +1;
-                
-                }
-                  else if(popx[j]== 0 && popy[i] == 1)
-                {
-                  Comparacion[j]= -1;
-                
-                }
-              }
-            Resultado.push(Comparacion);
-        }
-        console.log(Resultado)
-        return Resultado;
-      }
-
-
-
-
-
-//------------------------------------
 // Función para leer los valores de los input con la clase Xk
 function LeerTabla() {
     let valores = [];
@@ -76,46 +40,73 @@ function LeerTabla() {
 
     return valores;
 }
+function addPattern(){
+    var patron = LeerPatron();
+    
+    let y = TablaY();
+    let clase = document.getElementById("clasePatron");
+    clase = Number(clase.value);
+    console.log(clase -1)
+    let LernMatrix = Aprendizaje(patron, y, clase -1, lernM)
+    console.log(LernMatrix)
+    lernM = LernMatrix
+    
+    
+}
+function LeerPatron() {
+
+    let filaValores = []
+    for (let k = 0; k < n+1; k++) {
+        let inputs = document.querySelectorAll('.Pnew' + k);
+        inputs.forEach(input => {
+            filaValores.push(Number(input.value));
+        });
+    }
+    return filaValores
+}
 
 
 //Función para botón Crea vectores
-function genTablesXY(){
-    console.log("funcion gentables");
+function genTablesXY() {
+    
     P = parseInt(document.getElementById("clases").value);
     n = parseInt(document.getElementById("dimensionx").value);
-    
-    var MP = TablaY();
-    ImprimirTabla(MP,"y",P, "Y");
-    var PatX = TablaX();
-    ImprimirTabla(PatX, "x", n,"X")
 
+    var MP = TablaY();
+    ImprimirTabla(MP, "y", P, "Y");
+    var PatX = TablaX();
+    ImprimirTabla(PatX, "x", n, "X")
+    
+    let pattern = [];
+    let arr = new Array(n).fill().map((_,index) => `<input type=number class=Pnew${index +1}>`);
+    pattern.push(arr)
+    ImprimirTabla(pattern, "Pattern", n, "X")
 }
 
-function TablaX(){
+function TablaX() {
     let PatX = []
-    console.log("aqui n: "+n)
-    for(var k = 0; k<P; k++){
-        let arr = new Array(n).fill("<input type=number class=X"+k+">");
-        console.log(arr)
+    
+    for (var k = 0; k < P; k++) {
+        let arr = new Array(n).fill("<input type=number class=X" + k + ">");
+        
         PatX.push(arr);
     }
     return PatX;
 }
 
-
 function TablaY() {
     let MP = []
-    for(let k = 0; k < P; k++){
+    for (let k = 0; k < P; k++) {
         let arrClass = new Array(P).fill(0);
         arrClass[k] = 1;
         MP.push(arrClass);
     }
-    console.log("Hola"+MP);
+    
     //[1,0,0,
     //0,1,0,
     //0,0,1]
     return MP
-    
+
 }
 function ImprimirTabla(vector, x, columna, optional) {
     let TablaC = document.getElementById("Tabla" + x);
@@ -127,13 +118,112 @@ function ImprimirTabla(vector, x, columna, optional) {
         let label = optional + (i + 1);
         tabla += "<td>" + label + "</td>";
         for (let j = 0; j < columna; j++) {
-            tabla += "<td>" + vector[i][j] + "</td>";
+            tabla += "<td>" + vector[i][j]+ "</td>";
         }
         tabla += "</tr>";
     }
 
     tabla += "</table>";
     TablaC.innerHTML = tabla;
+    
 }
 
-//---------------------------------------------------------------------------------------------------------------------
+/////CODIGO AGREGADO
+//Funcion LernMatrix
+
+function LernMatrix() {
+    let x = LeerTabla();
+    let y = TablaY();
+    let C = 0
+    //Tabla aprendizaje 
+    let LernMatrix = Aprendizaje(x, y, C, lernM)
+    lernM = LernMatrix
+    console.log(LernMatrix)
+    ImprimirTabla(LernMatrix, "M", n, "y")
+
+}
+
+
+//---------------Fase de aprendizaje---------------------
+function Aprendizaje(xn, y, clase, lernM) {
+
+    let Auxx = []
+    let Auxy = []
+    
+    if (lernM.length === 0) {
+        //Genera la matriz desde cero
+        for (let i = 0; i < P; i++) {
+            Auxx = xn[i]
+            Auxy = y[i]
+            let Comparacion = []
+            for (let j = 0; j < n; j++) {
+
+                if (Auxx[j] == 1 && Auxy[i] == 1) {
+                    Comparacion[j] = +1;
+
+                }
+                else if (Auxx[j] == 0 && Auxy[i] == 1) {
+                    Comparacion[j] = -1;
+
+                }
+
+            }
+            lernM.push(Comparacion);
+        }
+
+        return lernM
+    }
+
+    //---------Cuando ingresa un patron xn-----
+    else {
+        let operacion = []
+        let AuxLM = []
+        //Genera la matrix cuando hay un patron xn
+        for (let i = 0; i < P; i++) {
+            Auxy = y[i]
+            AuxLM = lernM[i]
+            console.log("aux" + AuxLM)
+            for (let j = 0; j < n; j++) {
+                if (clase == i) {
+                    if (xn[j] == 1 && Auxy[i] == 1) {
+                        
+                        operacion[j] = AuxLM[j] + 1;
+                    }
+                    else if (xn[j] == 0 && Auxy[i] == 1) {
+                        operacion[j] = AuxLM[j] - 1;
+                        
+                    }
+                    console.log("oper" + operacion)
+
+                }
+            }
+            
+        }
+        lernM[clase] = operacion;
+        
+        return lernM
+    }
+}
+//------------------FASE DE RECUPERACION ------------------
+
+function Recuperacion(lernM, vector) {
+    let resultado = [];
+    let contador = 0
+    for (let i = 0; i < P; i++) { // Iteramos sobre lernM en su orden original
+        let auxiliar = lernM[i];
+        let sum = 0;
+        for (let j = 0; j < n; j++) {
+            sum += auxiliar[j] * vector[j];
+            if (sum > 1) {
+                contador = 1
+            }
+            else {
+                contador = 0
+            }
+        }
+        resultado.push(contador);
+    }
+    return resultado;
+}
+
+//--------------Lectura de xn----------------------
