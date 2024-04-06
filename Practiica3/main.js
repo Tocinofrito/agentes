@@ -34,40 +34,36 @@ function memMatrix(yMat, valoresTablaX){
     //[0,0,0,0,0]
     //[0,0,0,0,0]
 
-function Prueba(){
-    let Comparacion = []
-    let Resultado = []
-    let vectorx = [[1,0,1,0,1],[1,1,0,0,1],[1,0,1,1,0]]
-    let vectory = [[1,0,0],[0,1,0],[0,0,1]]
-    P = 3
-    n = 5 
-    for(let i = 0; i < P; i++) {
-        let reversex = vectorx.reverse();
-        let popx = reversex.pop();
+
+    function Prueba(){
+        let Resultado = []
+        let vectorx = [[1,0,1,0,1],[1,1,0,0,1],[1,0,1,1,0]]
+        let vectory = [[1,0,0],[0,1,0],[0,0,1]]
+        P = 3
+        n = 5 
         let reversey = vectory.reverse();
-        let popy = reversey.pop();
-        for(let j = 0; j < n; j++) {
-              if(popx[j]== 1 && popy[i] == 1)
-              {
-                Comparacion[j]= 1;
-                //memor[0] +=1
+        let reversex = vectorx.reverse();
+        for(let i = 0; i < P; i++) {
+            let popx = reversex.pop();
+            let popy = reversey.pop();
+            let Comparacion = []
+            for(let j = 0; j < n; j++) {
+             
+                  if(popx[j]== 1 && popy[i] == 1)
+                {
+                  Comparacion[j]= +1;
+                
+                }
+                  else if(popx[j]== 0 && popy[i] == 1)
+                {
+                  Comparacion[j]= -1;
+                
+                }
               }
-              else if(popx[j]== 0 && popy[i] == 1)
-              {
-                Comparacion[j]= -1;
-                //memor[0] -=1
-              }
-              else{
-              //No es necesario hacer nada
-
-            }
-        Resultado.push(Comparacion);
-    }
-    console.log(Comparacion)
-}
-
-}
-    
+            Resultado.push(Comparacion);
+        }
+        console.log(Resultado)
+      }
 
 
 
