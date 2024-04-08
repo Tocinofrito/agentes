@@ -46,11 +46,33 @@ function addPattern(){
     let y = TablaY();
     let clase = document.getElementById("clasePatron");
     clase = Number(clase.value);
-    console.log(clase -1)
     let LernMatrix = Aprendizaje(patron, y, clase -1, lernM)
-    console.log(LernMatrix)
     lernM = LernMatrix
-    
+    //No borrar!
+    console.log(lernM)
+    let patron_recuperado = Recuperacion(lernM,patron)
+    console.log(patron_recuperado)
+    //console.log(math.multiply(lernM,patron))
+//__________________________________________________________________
+let indices = [];
+let array = patron_recuperado;
+let element = Math.max(patron_recuperado);
+let idx = array.indexOf(element);
+while (idx != -1) {
+  indices.push(idx);
+  idx = array.indexOf(element, idx + 1);
+}
+console.log(indices);
+// [0, 2, 4]
+
+    //__________________________________________________________________
+    arr = new Array(P).fill(0);
+
+    for(let i=0; i<indices.length ;i++){
+        arr[i] = 1;
+    }
+    console.log("prueba" + arr);
+
     
 }
 function LeerPatron() {
@@ -71,16 +93,18 @@ function genTablesXY() {
     
     P = parseInt(document.getElementById("clases").value);
     n = parseInt(document.getElementById("dimensionx").value);
-
+    //Genera tabla de clases
     var MP = TablaY();
     ImprimirTabla(MP, "y", P, "Y");
+    //Genera tabla de patrones iniciales
     var PatX = TablaX();
     ImprimirTabla(PatX, "x", n, "X")
-    
+    //Genera tabla de patrón a añadir
     let pattern = [];
     let arr = new Array(n).fill().map((_,index) => `<input type=number class=Pnew${index +1}>`);
     pattern.push(arr)
     ImprimirTabla(pattern, "Pattern", n, "X")
+    //Genera tabla de patrón a recuperar
 }
 
 function TablaX() {
@@ -138,7 +162,7 @@ function LernMatrix() {
     //Tabla aprendizaje 
     let LernMatrix = Aprendizaje(x, y, C, lernM)
     lernM = LernMatrix
-    console.log(LernMatrix)
+    //console.log(LernMatrix)
     ImprimirTabla(LernMatrix, "M", n, "y")
 
 }
@@ -182,7 +206,6 @@ function Aprendizaje(xn, y, clase, lernM) {
         for (let i = 0; i < P; i++) {
             Auxy = y[i]
             AuxLM = lernM[i]
-            console.log("aux" + AuxLM)
             for (let j = 0; j < n; j++) {
                 if (clase == i) {
                     if (xn[j] == 1 && Auxy[i] == 1) {
@@ -207,6 +230,7 @@ function Aprendizaje(xn, y, clase, lernM) {
 //------------------FASE DE RECUPERACION ------------------
 
 function Recuperacion(lernM, vector) {
+
     let resultado = [];
     let contador = 0
     for (let i = 0; i < P; i++) { // Iteramos sobre lernM en su orden original
