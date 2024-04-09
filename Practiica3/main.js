@@ -106,35 +106,6 @@ function genTablesXY() {
     ImprimirTabla(pattern, "Pattern", n, "X")
     //Genera tabla de patrón a recuperar
 }
-
-function TablaX() {
-    let PatX = []
-    
-    for (var k = 0; k < P; k++) {
-        let arr = new Array(n).fill("<input type=number class=X" + k + ">");
-        
-        PatX.push(arr);
-    }
-    return PatX;
-}
-
-function TablaY() {
-    let MP = []
-    for (let k = 0; k < P; k++) {
-        let arrClass = new Array(P).fill(0);
-        arrClass[k] = 1;
-        MP.push(arrClass);
-    }
-    
-    //[1,0,0,
-    //0,1,0,
-    //0,0,1]
-    return MP
-
-}
-function ImprimirTabla(vector, x, columna, optional) {
-    let TablaC = document.getElementById("Tabla" + x);
-    TablaC.innerHTML = "";
     let tabla = "<table>";
     tabla += "<caption>" + "Tabla" + x + "</caption>";
     for (let i = 0; i < vector.length; i++) {
@@ -167,9 +138,6 @@ function LernMatrix() {
 
 }
 
-
-//---------------Fase de aprendizaje---------------------
-function Aprendizaje(xn, y, clase, lernM) {
 
     let Auxx = []
     let Auxy = []
