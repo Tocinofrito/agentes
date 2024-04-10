@@ -66,6 +66,7 @@ function recoverPattern(){
         arr[i] = 1;
     }
    // console.log("prueba" + arr);
+    ImprimirTabla([arr], "reco", P, "Clase")
 }
 
 function addPattern() {
