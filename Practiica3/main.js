@@ -60,12 +60,12 @@ function recoverPattern(){
         indices.push(idx);
         idx = array.indexOf(element, idx + 1);
     }
-    //console.log(indices)
+    console.log(indices)
     arr = new Array(P).fill(0);
-    for (let i = 0; i < indices.length; i++) {
-        arr[i] = 1;
-    }
-   // console.log("prueba" + arr);
+    indices.forEach(index =>{
+        arr[index] = 1
+    })
+    console.log("Pertenece a la clase: " + arr);
     ImprimirTabla([arr], "reco", P, "Clase")
 }
 
