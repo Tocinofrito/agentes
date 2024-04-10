@@ -80,6 +80,7 @@ function addPattern() {
     lernM = LernMatrix
     //No borrar!, este mostrará el estado en cada ocasión que se agregue
     console.log(lernM)
+    ImprimirTabla(lernM, "M", n, "y")
 }
 function LeerPatron(opt) {
 
