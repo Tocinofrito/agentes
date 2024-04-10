@@ -171,7 +171,7 @@ function LernMatrix() {
     //Tabla aprendizaje 
     let LernMatrix = Aprendizaje(x, y, C, lernM)
     lernM = LernMatrix
-    //console.log(LernMatrix)
+    console.log(LernMatrix)
     ImprimirTabla(LernMatrix, "M", n, "y")
 
 }
