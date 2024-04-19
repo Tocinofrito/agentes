@@ -1,3 +1,4 @@
+var Patronesrecuperados = [];
 //Variables 
 var P = 0
 var n = 0
@@ -43,7 +44,8 @@ function LeerTabla() {
     return valores;
 }
 
-function recoverPattern(){
+function recoverPattern(opt){
+    if(opt === null){
     let patron = LeerPatron('recP');
     //console.log('Patron a recuperar '+patron);
     
@@ -67,6 +69,32 @@ function recoverPattern(){
     })
     console.log("Pertenece a la clase: " + arr);
     ImprimirTabla([arr], "reco", P, "Clase")
+    
+    }
+    let patron = LeerPatron(opt);
+    //console.log('Patron a recuperar '+patron);
+    
+    //let patron_recuperado = Recuperacion(lernM, patron)
+    let patron_recuperado = math.multiply(lernM,patron);
+    let indices = [];
+    let array = patron_recuperado;
+    //console.log("array "+array)
+    let element = Math.max(...patron_recuperado);
+    //console.log("element "+element)
+    let idx = array.indexOf(element);
+    //console.log("idx " + idx)
+    while (idx != -1) {
+        indices.push(idx);
+        idx = array.indexOf(element, idx + 1);
+    }
+    console.log(indices)
+    arr = new Array(P).fill(0);
+    indices.forEach(index =>{
+        arr[index] = 1
+    })
+    console.log("Pertenece a la clase: " + arr);
+    //ImprimirTabla([arr], "reco", P, "Clase")
+    return arr;
 }
 
 function addPattern() {
@@ -81,6 +109,8 @@ function addPattern() {
     //No borrar!, este mostrará el estado en cada ocasión que se agregue
     console.log(lernM)
     ImprimirTabla(lernM, "M", n, "y")
+    Patronesrecuperados.push(recoverPattern('Pnew'));
+    ImprimirTabla(Patronesrecuperados, "PatronesRecuperados",Patronesrecuperados.length - 1,"Patron");
 }
 function LeerPatron(opt) {
 
@@ -170,11 +200,30 @@ function LernMatrix() {
     let x = LeerTabla();
     let y = TablaY();
     let C = 0
+    //let indices = [];
+    let tabla =[]
     //Tabla aprendizaje 
     let LernMatrix = Aprendizaje(x, y, C, lernM)
     lernM = LernMatrix
     console.log(LernMatrix)
     ImprimirTabla(LernMatrix, "M", n, "y")
+    x.forEach((element) =>{
+        let indices = [];
+        let ele = math.multiply(lernM, element)
+        let max = Math.max(...ele);
+        let idx = ele.indexOf(max);
+        while(idx != -1){
+            indices.push(idx);
+            idx = ele.indexOf(max, idx+1);
+        }
+        arr = new Array(P).fill(0);
+        indices.forEach(index =>{
+            arr[index] = 1
+        })
+        tabla.push(arr);
+    })
+    Patronesrecuperados = tabla;
+    ImprimirTabla(tabla, "PatronesRecuperados",tabla.length,"clase");
 
 }
 
