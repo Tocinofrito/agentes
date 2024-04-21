@@ -12,15 +12,28 @@ genAsocbutton.addEventListener("click", genAsociation, false);
 
 //
 var mX = [];
-
+var valSal = []
 //Funciones
 //Genera asociacion
-function genAsociation(){
-  var valSal = LeerTabla();
-  valSal = math.transpose(valSal)
-  console.log(mX)
-  console.log(valSal)
+function genAsociation() {
+  valSal = LeerTabla();
+  mX = TablaY();
+  let res = []
+  for (let i = 0; i < valSal.length; i++) {
+    // Convertir cada elemento de valSal en un array de un solo elemento
+    //El cuál es el vector que se multiplica por el patrón
+    let valSal_single = valSal[i].map(el => [el]);
+    
+    
+    let resultado = math.multiply(valSal_single, [mX[i]]);
+    console.log(resultado);
+    //Aquí se van a sumar los resultados para generar la matríz
+    if(res.length == 0 ){
+      
+    }
+  }
 }
+
 function LeerTabla() {
   let valores = [];
   for (let k = 0; k < nPat; k++) {
