@@ -1,4 +1,5 @@
 //Selectores de 
+
 var nPat = parseInt(document.getElementById("clases").value);
 var dPat = parseInt(document.getElementById("dimensionx").value);
 var dSal = parseInt(document.getElementById("dimensiony").value);
@@ -18,21 +19,23 @@ var valSal = []
 function genAsociation() {
   valSal = LeerTabla();
   mX = TablaY();
-  let res = []
+  let res = []; // Variable para almacenar la suma de las matrices
   for (let i = 0; i < valSal.length; i++) {
-    // Convertir cada elemento de valSal en un array de un solo elemento
-    //El cuál es el vector que se multiplica por el patrón
     let valSal_single = valSal[i].map(el => [el]);
-    
     
     let resultado = math.multiply(valSal_single, [mX[i]]);
     console.log(resultado);
-    //Aquí se van a sumar los resultados para generar la matríz
-    if(res.length == 0 ){
-      
+    
+    // Sumar el resultado actual a la matriz resultado
+    if(res.length === 0) {
+      res = resultado;
+    } else {
+      res = math.add(res, resultado);
     }
   }
+  console.log(res); // Aquí tienes la matriz resultado
 }
+
 
 function LeerTabla() {
   let valores = [];
